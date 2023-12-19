@@ -3,6 +3,9 @@ import QUESTIONS from "./questions.js";
 import quizCompleteImg from '../assets/quiz-complete.png';
 
 import Question from "./Question.jsx";
+import ProgressBar from "./ProgressBar.jsx";
+
+import QuestionTimer from "./QuestionTimer.jsx";
 
 export default function Quiz() {
   const [userAnswers, setUsersAnswers] = useState([]);
@@ -31,6 +34,7 @@ export default function Quiz() {
   return (    
     <div id="quiz">
       <div id="question">
+        <QuestionTimer timeout={4000} onTimeOut={() => handleSelectAnswer(null)}/>
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul id="answers">
           {shuffledAnswers.map((answer) => (
@@ -41,7 +45,7 @@ export default function Quiz() {
             </li>
           ))}
         </ul>
-      </div>
-    </div>         
+      </div>   
+    </div> 
   );
 }
