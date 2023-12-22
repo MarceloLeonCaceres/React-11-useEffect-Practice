@@ -10,6 +10,18 @@ export default function Quiz() {
 
   const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
 
+  const handleSelectAnswer = useCallback(
+    function handleSelectAnswer(selectedAnswer) {
+      setUsersAnswers((prevUserAnswers) => {
+        return [...prevUserAnswers, selectedAnswer];
+      });      
+    }, []);
+
+  const handleSkipAnswer = useCallback(
+    () => handleSelectAnswer(null),
+    [handleSelectAnswer]
+  );
+
   if (quizIsComplete) {
     return (
       <div id="summary">
@@ -18,19 +30,6 @@ export default function Quiz() {
       </div>
     );
   }
-
-  const handleSelectAnswer = useCallback(
-    function handleSelectAnswer(selectedAnswer) {
-      setUsersAnswers((prevUserAnswers) => {
-        return [...prevUserAnswers, selectedAnswer];
-      });
-      
-    }, []);
-
-  const handleSkipAnswer = useCallback(
-    () => handleSelectAnswer(null),
-    [handleSelectAnswer]
-  );
 
   return (
     <div id="quiz">
